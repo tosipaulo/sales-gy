@@ -3,15 +3,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');   
 
-const mailer = require('../../config/nodemailer')
-const authConfig = require('../../config/auth')
+const mailer = require('../../config/nodemailer');
 
 const User = require('../schema/User');
 
 const router = express.Router();
 
 function generateToken(params = {}) {
-    return jwt.sign(params, authConfig.secret, {
+    return jwt.sign(params, process.env.AUTH_SECRET, {
         expiresIn: 86400,
     })
 }
@@ -51,8 +50,6 @@ router.post('/authenticate', async (req, res) => {
         return res.status(400).send({ error: 'Invalid passoword' })
     }
     user.password = undefined;
-
-    const token = 
 
     res.send({
         user, 

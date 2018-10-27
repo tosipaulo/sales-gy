@@ -35,7 +35,6 @@ router.put('/:saleId', async (req, res) => {
 
     try {
         const saleReq = req.body;
-        console.log(saleReq)
         
         const sale = await Sale.findByIdAndUpdate(req.params.saleId, saleReq , {new: true})
         return res.send({ msg: 'venda atualizada com sucesso', sale})
