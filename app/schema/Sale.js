@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const SaleSchema = mongoose.Schema({
     month: {
         type: Number,
-        required: true
+        require: true
     },
     year: {
         type: Number,
-        required: true
+        require: true
     },
     customerName: {
         type: String,
@@ -18,30 +18,30 @@ const SaleSchema = mongoose.Schema({
     paymentMethod: {
         type: String,
         enum: ['credit', 'cash', 'ticket'],
-        required: true
+        require: true
     },
     amount: {
         type: Number,
-        required: true
+        require: true
     },
     details: {
         installments: {
             type: Number,
-            required: true,
+            require: true,
             default: 0
         },
         amout: {
             type: Number,
-            required: true
+            require: true
         },
         installmentCurrent: {
             type: Number,
-            required: true,
+            require: true,
             default: 0
         },
         installmentsDate: {
             type: String,
-            required: true
+            require: true
         } 
     }
 })
