@@ -57,4 +57,5 @@ router.delete('/:clientId', async (req, res) => {
     }
 })
 
+
 module.exports = (app) => app.use('/client', router)

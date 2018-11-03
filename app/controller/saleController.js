@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 
      try {
-         const sale = await Sale.create({...req.body, user: req.userId });
+        const sale = await Sale.create({...req.body, user: req.userId });
 
         return res.send({ sale });
 
@@ -54,6 +54,28 @@ router.delete('/:saleId', async (req, res) => {
 
     }catch(err) {
         return res.status(400).send({ erro: 'Não foi possivel deletar uma venda' })
+    }
+})
+
+router.get('/total', async (req, res) => {
+
+    try {
+
+        const sale = await Sale.aggregate([{
+            $project: { credit: { $sum: "$details.amout"}}
+        },{
+            $group: {
+                _id: null,
+                total: {$sum: "$credit"}
+            }
+        },{
+            $project: {_id: 0, total: 1}
+        }])
+
+        return res.send(sale[0])
+
+    } catch (err) { 
+
     }
 })
 
