@@ -43,6 +43,16 @@ const SaleSchema = mongoose.Schema({
             type: String,
             require: true
         } 
+    },
+    user: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        require: true
+    },
+    client: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Client',
+        require: true
     }
 })
 

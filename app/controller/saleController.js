@@ -10,7 +10,7 @@ router.use(authMiddleware)
 router.get('/', async (req, res) => {
     try {
 
-        const sale = await Sale.find();
+        const sale = await Sale.find().populate('client');
         
         res.send({ sale })
 
@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
 
      try {
-       
-        const sale = await Sale.create(req.body);
+         const sale = await Sale.create({...req.body, user: req.userId });
+
         return res.send({ sale });
 
     }catch(err) {

@@ -1,28 +1,29 @@
 const mongoose = require('mongoose');
 
 const ClientSchema = mongoose.Schema({
-    month: {
-        type: Number,
-        required: true
-    },
-    year: {
-        type: Number,
-        required: true
-    },
-    customerName: {
+    name: {
         type: String,
+        require: true
     },
-    customerPhone: {
-        type: String
-    },
-    paymentMethod: {
+    email: {
         type: String,
-        enum: ['credit', 'cash', 'ticket'],
-        required: true
+        require: true
     },
-    amount: {
-        type: Number,
-        required: true
+    phones: [
+        {
+            _id: false,
+            number: {
+                type: String,
+                require: true,
+            }
+        }
+    ],
+    birth: {
+        type: Date
+    },
+    createAt: {
+        type: Date,
+        default: Date.now
     }
 })
 
